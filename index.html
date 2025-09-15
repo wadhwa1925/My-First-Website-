@@ -12,45 +12,64 @@
       background: linear-gradient(135deg, #ffdee9, #b5fffc);
       color: #333;
       min-height: 100vh;
-      display: flex;
     }
 
-    /* Sidebar */
-    .sidebar {
-      width: 220px;
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
       background: white;
-      box-shadow: 2px 0 8px rgba(0,0,0,0.1);
-      padding: 20px;
-      position: fixed;
-      height: 100%;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
     }
-    .sidebar h2 {
+
+    header h1 {
       font-size: 20px;
-      margin-bottom: 15px;
       color: #ff4081;
     }
-    .sidebar ul { list-style: none; }
-    .sidebar ul li { margin: 12px 0; }
-    .sidebar ul li a {
+
+    .menu-btn {
+      font-size: 26px;
+      cursor: pointer;
+    }
+
+    /* Sidebar (hidden by default) */
+    .sidebar {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      top: 0;
+      right: 0;
+      background-color: white;
+      box-shadow: -2px 0 8px rgba(0,0,0,0.1);
+      overflow-x: hidden;
+      transition: 0.3s;
+      padding-top: 60px;
+      z-index: 1200;
+    }
+
+    .sidebar a {
+      padding: 12px 20px;
       text-decoration: none;
+      font-size: 18px;
       color: #333;
-      font-weight: 500;
+      display: block;
       transition: 0.2s;
     }
-    .sidebar ul li a:hover { color: #ff4081; }
 
-    /* Main content */
-    .content {
-      margin-left: 240px;
-      padding: 20px;
-      flex: 1;
+    .sidebar a:hover {
+      color: #ff4081;
     }
 
-    h1 {
-      text-align: center;
-      margin-bottom: 20px;
-      font-size: 2.2rem;
-      color: #222;
+    .sidebar .close-btn {
+      position: absolute;
+      top: 15px;
+      right: 25px;
+      font-size: 28px;
+      cursor: pointer;
     }
 
     .gallery {
@@ -58,7 +77,9 @@
       flex-wrap: wrap;
       gap: 20px;
       justify-content: center;
+      padding: 20px;
     }
+
     .item {
       background: white;
       border-radius: 12px;
@@ -68,14 +89,17 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       transition: transform 0.3s;
     }
+
     .item img {
       width: 100%;
       height: 280px;
       object-fit: cover;
       border-radius: 12px;
     }
+
     .item h3 { margin: 10px 0 5px; color: #444; }
     .item p { font-size: 14px; color: #666; }
+
     .item button {
       margin-top: 10px;
       padding: 8px 14px;
@@ -85,87 +109,92 @@
       border-radius: 6px;
       cursor: pointer;
     }
+
     .item button:disabled {
       background: #ccc;
       cursor: default;
     }
+
     .item:hover { transform: translateY(-5px); }
 
-    /* Contact Section */
     .contact {
-      margin-top: 50px;
+      margin: 40px 20px;
       padding: 20px;
       background: white;
       border-radius: 12px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       text-align: center;
     }
-    .contact h2 {
-      margin-bottom: 15px;
-      color: #ff4081;
-    }
-    .contact p { margin: 8px 0; color: #444; }
+
+    .contact h2 { margin-bottom: 15px; color: #ff4081; }
   </style>
 </head>
 <body>
 
+  <!-- Header -->
+  <header>
+    <h1>Arya's</h1>
+    <span class="menu-btn" onclick="openMenu()">⋮</span>
+  </header>
+
   <!-- Sidebar -->
-  <div class="sidebar">
-    <h2>Arya's</h2>
-    <ul>
-      <li><a href="#sarees">Sarees</a></li>
-      <li><a href="#suits">Suits</a></li>
-      <li><a href="#contact">Contact Us</a></li>
-    </ul>
+  <div id="mySidebar" class="sidebar">
+    <span class="close-btn" onclick="closeMenu()">×</span>
+    <a href="#sarees">Sarees</a>
+    <a href="#suits">Suits</a>
+    <a href="#contact">Contact Us</a>
   </div>
 
-  <!-- Main Content -->
-  <div class="content">
-    <h1>Welcome to Arya's Collection</h1>
-
-    <!-- Sarees Section -->
-    <h2 id="sarees">Sarees</h2>
-    <div class="gallery">
-      <div class="item">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRK08ltSMH5xNfMdIcfjsOqQVVf5qQXZe7hEmV3urAJopHA8TAs5_IVaOB1&s=10" alt="Red Saree">
-        <h3>Red Silk Saree</h3>
-        <p>Elegant silk saree perfect for parties and weddings.</p>
-        <button disabled>Contact</button>
-      </div>
-
-      <div class="item">
-        <img src="https://www.uniformsarees.in/cdn/shop/products/GREEN_AND_YELLOW_WITH_PINK_COLOR_CRAFTLY_COTTON_CORPORATE_UNIFORM_SAREE_812_500x.jpg?v=1579880697" alt="Blue Saree">
-        <h3>Blue Chiffon Saree</h3>
-        <p>Lightweight chiffon saree, easy to carry and stylish.</p>
-        <button disabled>Contact</button>
-      </div>
-
-      <div class="item">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWEUT-dU8sVsxjGWKRiRM-fmt2HqhE_uRkZXQPBDLfebJ4Mvr_dolTPdTk&s=10" alt="Yellow Saree">
-        <h3>Yellow Georgette Saree</h3>
-        <p>Soft georgette fabric with stylish prints.</p>
-        <button disabled>Contact</button>
-      </div>
+  <!-- Sarees Section -->
+  <h2 id="sarees" style="text-align:center; margin:20px;">Sarees</h2>
+  <div class="gallery">
+    <div class="item">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRK08ltSMH5xNfMdIcfjsOqQVVf5qQXZe7hEmV3urAJopHA8TAs5_IVaOB1&s=10" alt="Red Saree">
+      <h3>Red Silk Saree</h3>
+      <p>Elegant silk saree perfect for parties and weddings.</p>
+      <button disabled>Contact</button>
     </div>
 
-    <!-- Suits Section -->
-    <h2 id="suits" style="margin-top:40px;">Suits</h2>
-    <div class="gallery">
-      <div class="item">
-        <img src="https://i.ibb.co/LCqYvxt/suit.jpg" alt="Sample Suit">
-        <h3>Designer Suit</h3>
-        <p>Trendy designer suit for casual and festive occasions.</p>
-        <button disabled>Contact</button>
-      </div>
+    <div class="item">
+      <img src="https://www.uniformsarees.in/cdn/shop/products/GREEN_AND_YELLOW_WITH_PINK_COLOR_CRAFTLY_COTTON_CORPORATE_UNIFORM_SAREE_812_500x.jpg?v=1579880697" alt="Blue Saree">
+      <h3>Blue Chiffon Saree</h3>
+      <p>Lightweight chiffon saree, easy to carry and stylish.</p>
+      <button disabled>Contact</button>
     </div>
 
-    <!-- Contact Section -->
-    <div id="contact" class="contact">
-      <h2>Contact Us</h2>
-      <p>Instagram: </p>
-      <p>Email: </p>
+    <div class="item">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWEUT-dU8sVsxjGWKRiRM-fmt2HqhE_uRkZXQPBDLfebJ4Mvr_dolTPdTk&s=10" alt="Yellow Saree">
+      <h3>Yellow Georgette Saree</h3>
+      <p>Soft georgette fabric with stylish prints.</p>
+      <button disabled>Contact</button>
     </div>
   </div>
 
+  <!-- Suits Section -->
+  <h2 id="suits" style="text-align:center; margin:20px;">Suits</h2>
+  <div class="gallery">
+    <div class="item">
+      <img src="https://i.ibb.co/LCqYvxt/suit.jpg" alt="Sample Suit">
+      <h3>Designer Suit</h3>
+      <p>Trendy designer suit for casual and festive occasions.</p>
+      <button disabled>Contact</button>
+    </div>
+  </div>
+
+  <!-- Contact Section -->
+  <div id="contact" class="contact">
+    <h2>Contact Us</h2>
+    <p>Instagram: </p>
+    <p>Email: </p>
+  </div>
+
+  <script>
+    function openMenu() {
+      document.getElementById("mySidebar").style.width = "220px";
+    }
+    function closeMenu() {
+      document.getElementById("mySidebar").style.width = "0";
+    }
+  </script>
 </body>
 </html>
